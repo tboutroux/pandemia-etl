@@ -1,12 +1,13 @@
-from extract.extra import load_monkeypox_data, load_covid_daily_data, load_covid_latest_excel
+from extract.extract import extract_data
 from transform.transform import transform_continents, transform_countries, get_disease_df
 from load.load import insert_dataframe, get_engine
+import pandas as pd
 
 def main():
     # Chargement
-    monkeypox = load_monkeypox_data("data/owid-monkeypox-data.csv")
-    covid_daily = load_covid_daily_data("data/worldometer_coronavirus_daily_data.csv")
-    covid_latest = load_covid_latest_excel("data/country_wise_latest.csv.xls")
+    monkeypox = extract_data("data/owid-monkeypox-data.csv")
+    covid_daily = extract_data("data/worldometer_coronavirus_daily_data.csv")
+    covid_latest = extract_data("data/country_wise_latest.csv")
 
     # Transformation
     continents = transform_continents(covid_latest)

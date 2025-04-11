@@ -1,10 +1,25 @@
 import pandas as pd
 
-def load_monkeypox_data(path):
-    return pd.read_csv(path)
+def extract_data(path: str) -> pd.DataFrame:
+    """
+    Load data from a CSV file.
 
-def load_covid_daily_data(path):
-    return pd.read_csv(path)
+    Args:
+        path (str): The path to a CSV/JSON file.
 
-def load_covid_latest_excel(path):
-    return pd.read_excel(path)
+    Returns:
+        pd.DataFrame: The loaded data as a pandas DataFrame.
+    """
+    
+    try:
+        if path.endswith('.csv'):
+            data = pd.read_csv(path)
+        elif path.endswith('.json'):
+            data = pd.read_json(path)
+        else:
+            raise ValueError("Unsupported file format. Please provide a CSV or JSON file.")
+        
+        return data
+    except Exception as e:
+        print(f"Error loading data: {e}")
+        return pd.DataFrame()
