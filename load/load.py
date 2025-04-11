@@ -10,3 +10,4 @@ def insert_dataframe(df, table_name):
 
 def get_table(engine, table_name):
     return pd.read_sql(f"SELECT * FROM {table_name}", engine)
+
